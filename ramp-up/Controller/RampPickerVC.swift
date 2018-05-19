@@ -32,7 +32,8 @@ class RampPickerVC: UIViewController {
         view.insertSubview(sceneView, at: 0)
         
         preferredContentSize = size
-        
+        view.layer.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        view.layer.borderWidth = 3.0
         let scene = SCNScene(named: "art.scnassets/ramps.scn")!
         sceneView.scene = scene
         
@@ -55,34 +56,6 @@ class RampPickerVC: UIViewController {
         Ramp.startRotation(node: quarter, duration: 0.07)
         scene.rootNode.addChildNode(quarter)
         
-        
-//        var rotate = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(0.01 * Double.pi), z: 0, duration: 0.05))
-//
-//        var obj = SCNScene(named: "art.scnassets/pipe.dae")
-//        var node = obj?.rootNode.childNode(withName: "pipe", recursively: true)!
-//        node?.runAction(rotate)
-//        node?.scale = SCNVector3Make(0.0022, 0.0022, 0.0022)
-//        node?.position = SCNVector3Make(-0.95, 0.8, -1)
-//        scene.rootNode.addChildNode(node!)
-//
-//        rotate = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(0.01 * Double.pi), z: 0, duration: 0.06))
-//
-//        obj = SCNScene(named: "art.scnassets/pyramid.dae")
-//        node = obj?.rootNode.childNode(withName: "pyramid", recursively: true)!
-//        node?.runAction(rotate)
-//        node?.scale = SCNVector3Make(0.0058, 0.0058, 0.0058)
-//        node?.position = SCNVector3Make(-0.95, 0, -1)
-//        scene.rootNode.addChildNode(node!)
-//
-//        rotate = SCNAction.repeatForever(SCNAction.rotateBy(x: 0, y: CGFloat(0.01 * Double.pi), z: 0, duration: 0.07))
-//
-//        obj = SCNScene(named: "art.scnassets/quarter.dae")
-//        node = obj?.rootNode.childNode(withName: "quarter", recursively: true)!
-//        node?.runAction(rotate)
-//        node?.scale = SCNVector3Make(0.0058, 0.0058, 0.0058)
-//        node?.position = SCNVector3Make(-0.95, -1.4, -1)
-//        scene.rootNode.addChildNode(node!)
-        
     }
     
     @objc func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
@@ -92,6 +65,7 @@ class RampPickerVC: UIViewController {
         if hitResults.count > 0 {
             let node = hitResults[0].node
             rampPlacerVC.onRampSelected(node.name!)
+            dismiss(animated: true, completion: nil)
         }
     }
     
